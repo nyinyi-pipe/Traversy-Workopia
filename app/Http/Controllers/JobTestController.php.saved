@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class JobController extends Controller
+{
+
+    // Listing All
+    public function index()
+    {
+        $title = " JOB AGAIN: ";
+        $jobs = [
+            'TEST',
+            'TEST2',
+            'TEST3'
+        ];
+        return view('jobs.index', compact('title', 'jobs'));
+    }
+
+    // Show the Create form
+    public function create()
+    {
+        $title = "Create New Job 123123";
+        return view('jobs.create')->with('jobtitle', $title);
+    }
+
+    // Save Record from Create Form
+    public function store(Request $request)
+    {
+        $title = $request->input('title');
+        $description = $request->input('description');
+
+        return "Job title : $title  - Description : $description";
+    }
+    // Show / Select By ID
+    public function show(string $id)
+    {
+        return view('jobs.show', compact('id'));
+    }
+
+
+
+
+}

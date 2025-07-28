@@ -1,0 +1,137 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+// Respond Object
+// Route::get('/successful', function () {
+//     return response("Successful Login", 200);
+// });
+
+// Route::get('/pagenotfound', function () {
+//     return response('Page Not Found', 404);
+// });
+
+// Route::get('/permissiondenied', function () {
+//     return new Response('413 Permission Desined', 413);
+// });
+
+// // Response Helper with Header
+// Route::get('/header', function () {
+//     // return new Response('Header', 200)->header('Content-type', 'text/plain');
+//     return response('<a>Hello</a>', 200)->header('Content-Type', 'text/html');
+// });
+
+// // Response Helper with JSON
+// Route::get('/json', function () {
+//     return response()->json(['name' => 'John', 'email' => 'john@gmail.com']);
+// });
+
+// Response Helper with Download
+Route::get('/downloadable', function () {
+    return response()->download(public_path('ai.png'));
+});
+
+
+// COOKIE (SET - GET)
+Route::get('/set-cookie', function () {
+    return response()->json(['name' => 'nyi', 'email' => 'nyi@nyi.com'])->cookie('name', 'nyi');
+});
+
+Route::get('/read-cookie', function (Request $request) {
+    $cookieValue = $request->cookie('email');
+    return response()->json(['cookie' => $cookieValue]);
+});
+
+
+
+
+
+// Request Object
+
+Route::get('/reqobj', function (Request $request) {
+    return [
+        'method' => $request->method(),
+        'url' => $request->url(),
+        'ip' => $request->ip(),
+        'path' => $request->path(),
+        'userAgent' => $request->userAgent(),
+        'fullUrl' => $request->fullUrl(),
+        'header' => $request->header(),
+    ];
+});
+
+
+// Query Params
+Route::get('/users', function (Request $request) {
+    return $request->query('name');
+});
+
+Route::get('/defaultname', function (Request $request) {
+    return $request->input('name', 'Default Value');
+});
+
+// Exclude param
+Route::get('/exclude', function (Request $request) {
+    return $request->except(['name']);
+});
+
+// Only with Multiple Params
+Route::get('/tester', function (Request $request) {
+    // return $request->only(['name', 'age']);
+    return $request->all();
+});
+
+
+
+Route::get('/jobs', function () {
+    return view('/jobs/jobs');
+})->name('jobs');
+
+// Link with Named Route
+Route::get('/test', function () {
+    $url = route('jobs');
+    return "<a href='$url'> Click Named Route !</a>";
+});
+
+//  API usage
+Route::get('/api/v1/users', function () {
+    return [
+        'name' => 'John Doe',
+        'email' => 'john@gmail.com',
+    ];
+});
+
+
+
+
+
+// Route Parameter
+Route::get('/posts/{id}', function (string $id) {
+    return "Post " . $id;
+});
+
+// Route Multi Params
+Route::get('/articles/{id}/comments/{cid}', function (string $id, string $cID) {
+    return "Articles " . $id . " " . "Comment " . $cID;
+});
+
+// Route Params Pattern (only NUMBER)
+// Route::get('/{id}', function (string $ID) {
+//     return "Number Pattern " . $ID;
+//     // })->where('id', '[0-9]+');
+//     // })->whereNumber('id');
+// });
+
+// Route Params Pattern (all input will be STRING)
+Route::get('/textpatterns/{id}', function (string $id) {
+    return "Text Pattern " . $id;
+    // })->where('$id', '[a-zA-z]+');
+})->whereAlpha('$id');
