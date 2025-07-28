@@ -10,9 +10,14 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index']);
+
 Route::resource('jobs', JobController::class);
+
+
+
 // Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 // Route::get('/jobs/create', [JobController::class, 'create'])->name('#createjob');
 // Route::get('/jobs/{id}', [JobController::class, 'show'])->name('#showjob');
 // Route::post('/jobs', [JobController::class, 'store']);
+
 
