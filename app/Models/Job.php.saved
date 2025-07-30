@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+class Job
+{
+
+    public static function all(): array
+    {
+        return [
+            [
+                "id" => 1,
+                "title" => "Software Engineer",
+                "description" => "Software EngineerSoftware EngineerSoftware EngineerSoftware Engineer "
+            ],
+            [
+                "id" => 2,
+                "title" => "Software Engineer 2",
+                "description" => "Software EngineerSoftware EngineerSoftware EngineerSoftware Engineer "
+            ],
+            [
+                "id" => 3,
+                "title" => "Software Engineer 3",
+                "description" => "Software EngineerSoftware EngineerSoftware EngineerSoftware Engineer "
+            ],
+        ];
+    }
+}

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Job;
 
 class JobController extends Controller
 {
@@ -12,15 +14,12 @@ class JobController extends Controller
      */
     public function index(): View
     {
-        $title = "Available Job Lists";
-        $jobs = [
-            'Web Development',
-            'ReactJS Development',
-            'Flutter Mobile Development',
-            'K8S Development',
-            'System Engineer',
-        ];
-        return view('jobs.index', compact('title', 'jobs'));
+        // return view('jobs')->with('jobs', $jobs);
+
+        $jobs = Job::all();// all() is default Eloquent ()
+
+        return view('jobs.index')->with('jobs', $jobs);
+
     }
 
     /**
