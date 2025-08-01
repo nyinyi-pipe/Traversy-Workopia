@@ -34,7 +34,7 @@ class JobFactory extends Factory
             'contact_email' => $this->faker->safeEmail(),
             'contact_phone' => $this->faker->phoneNumber(),
             'company_name' => $this->faker->company(),
-            'company_description' => $this->faker->sentences(1, true),
+            'company_description' => $this->faker->paragraphs(2, true),
             'company_logo' => $this->faker->imageUrl([100, 100, 'business', true, 'logo']),
             'company_website' => $this->faker->url(),
         ];

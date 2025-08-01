@@ -14,8 +14,11 @@ return new class extends Migration {
         // Clear table data
         DB::table('job_listings')->truncate();
         Schema::table('job_listings', function (Blueprint $table) {
-            $table->text('requirements')->nullable();
-            // $table->text()
+            $table->text('requirements')->nullable()->change();
+            $table->text('benefits')->nullable()->change();
+            $table->text('address')->nullable()->change();
+            $table->text('company_description')->nullable()->change();
+            $table->string('tags')->nullable()->change();
         });
     }
 
@@ -25,7 +28,11 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('job_listings', function (Blueprint $table) {
-            //
+            $table->text('requirements')->nullable()->change();
+            $table->text('benefits')->nullable()->change();
+            $table->text('address')->nullable()->change();
+            $table->text('company_description')->nullable()->change();
+            $table->string('tags')->nullable()->change();
         });
     }
 };
