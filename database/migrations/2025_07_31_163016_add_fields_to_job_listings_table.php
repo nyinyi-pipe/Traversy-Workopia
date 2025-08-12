@@ -11,13 +11,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        // ********* VD : Series 07:09*********//
         // Clear table data
         DB::table('job_listings')->truncate();
+
         Schema::table('job_listings', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->after('id');
 
             $table->integer('salary');
-            $table->string('tags')->nullable;
+            $table->string('tags')->nullable();
             $table->enum('job_type', ['Full-Time', 'Part-Time', 'On-Call', 'Contract', 'Temporary', 'Internship', 'Volunteer'])->default('Full-Time');
             $table->boolean('remote')->default(false);
             $table->string('requirements')->nullable();
@@ -32,11 +34,12 @@ return new class extends Migration {
             $table->string('company_description')->nullable();
             $table->string('company_logo')->nullable();
             $table->string('company_website')->nullable();
-
             // Add user foreign key constraint
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onDelete('cascade');
-
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            // 'cascade' mean when user is deleted , job listings of this user will be deleted
         });
     }
 
@@ -47,7 +50,8 @@ return new class extends Migration {
     {
         // when we need to drop/remove table's columns, we have to call this function()
         Schema::table('job_listings', function (Blueprint $table) {
-            $table->dropForeign('user_id');
+
+            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
 
             $table->dropColumn([

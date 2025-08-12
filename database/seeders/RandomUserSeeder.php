@@ -14,6 +14,6 @@ class RandomUserSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory(10)->create();
-        echo 'Jobs created successfully';
+        echo 'Users created successfully';
     }
 }

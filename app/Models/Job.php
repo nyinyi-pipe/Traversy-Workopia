@@ -10,8 +10,10 @@ class Job extends Model
 {
     use HasFactory;
 
-    protected $table = 'job_listings';// Job table is already created by default Application Table , so, may be conflict.
+    // Job table is already created by default Application Table , so, may be conflict.
+    protected $table = 'job_listings';
 
+    // To Secure
     protected $fillable = [
         'title',
         'description',
@@ -32,7 +34,7 @@ class Job extends Model
         'company_logo',
         'company_website',
         'user_id'
-    ];// for Security
+    ];
 
 
     // Relation to User

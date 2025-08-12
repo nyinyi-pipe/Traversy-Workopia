@@ -14,6 +14,6 @@ class RandomJobSeeder extends Seeder
     public function run(): void
     {
         $job = Job::factory(10)->create();
-        echo 'Jobs created successfully';
+        echo "Jobs created Successfully";
     }
 }
