@@ -22,11 +22,9 @@
             @else
             <span class="text-xs bg-green-500 text-white rounded-full px-2 py-1 ml-2">Remote</span>
             @endif
-
         </li>
         <li class="mb-2">
             <strong>Tags:</strong> <span>{{ucwords((str_replace(',',', ',$job->tags)))}}</span>
-
         </li>
     </ul>
     <a href="{{route('jobs.show',$job->id)}}"
